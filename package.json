@@ -1,5 +1,5 @@
 {
-  "name": "vec-js",
+  "name": "@taiyuuki/vec-js",
   "version": "0.0.1",
   "description": "A JavaScript library for working with vectors.",
   "type": "module",
@@ -16,7 +16,7 @@
     "lint": "eslint --fix",
     "build": "rollup -c",
     "test": "vitest",
-    "publish": "pnpm publish --registry=https://registry.npmjs.org"
+    "publish": "pnpm publish --registry=https://registry.npmjs.org --access=public"
   },
   "keywords": [],
   "sideEffects": false,
