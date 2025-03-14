@@ -1,7 +1,7 @@
 {
   "name": "vec-js",
   "version": "0.0.1",
-  "description": "",
+  "description": "A JavaScript library for working with vectors.",
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",

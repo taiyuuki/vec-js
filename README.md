@@ -1,6 +1,6 @@
 ### vec-js
 
-A JavaScript library for working with vectors and matrices.
+A JavaScript library for working with vectors.
 
 ## Usage
 
