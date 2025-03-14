@@ -1,20 +1,14 @@
 type Key = number | string | symbol
-type Vec2Attr = 'g' | 'r' | 'x' | 'y'
-type Vec3Attr = 'b' | 'g' | 'r' | 'x' | 'y' | 'z'
-type Vec4Attr = 'a' | 'b' | 'g' | 'r' | 'w' | 'x' | 'y' | 'z'
+type V2 = 'g' | 'r' | 'x' | 'y'
+type V3 = 'b' | 'g' | 'r' | 'x' | 'y' | 'z'
+type V4 = 'a' | 'b' | 'g' | 'r' | 'w' | 'x' | 'y' | 'z'
 
-interface Vector { 
-    [Symbol.toStringTag](): string;
-    [Symbol.toPrimitive](): string;
-    toJSON(): number[];
-}
-
-type Vec<T extends string> = Vector & {
-    [K in `${T}${T}`]: Vec<Vec2Attr>;
+type Vec<T extends string> = {
+    [K in `${T}${T}`]: Vec<V2>;
 } & {
-    [K in `${T}${T}${T}`]: Vec<Vec3Attr>;
+    [K in `${T}${T}${T}`]: Vec<V3>;
 } & {
-    [K in `${T}${T}${T}${T}`]: Vec<Vec4Attr>;
+    [K in `${T}${T}${T}${T}`]: Vec<V4>;
 } & {
     [K in T]: number;
 } & { [K: number]: number }
@@ -96,11 +90,11 @@ class Vec2 {
     static SIZE = 2
     
     constructor(x: number, y: number) {
-        this._target = Object.create(Vec2.prototype)
-        this._target.x = x
-        this._target.y = y
+        const _target = Object.create(Vec2.prototype)
+        _target.x = x
+        _target.y = y
 
-        return new Proxy(this._target, {
+        return new Proxy(_target, {
             get: function(target: Vec2, prop: string, receiver: any) {
                 return getValue(target, prop, receiver, Vec2)
             },
@@ -115,11 +109,21 @@ class Vec2 {
     }
 
     [Symbol.toPrimitive]() {
-        return `vec2(${this._target.x}, ${this._target.y})`
+
+        return this.toString()
+    }
+
+    *[Symbol.iterator]() {
+        yield this.x
+        yield this.y
+    }
+
+    toString() {
+        return `vec2(${this.x}, ${this.y})`
     }
 
     toJSON() {
-        return [this._target.x, this._target.y]
+        return [this.x, this.y]
     }
 }
 
@@ -139,12 +143,12 @@ class Vec3 {
     static SIZE = 3
 
     constructor(x: number, y: number, z: number) {
-        this._target = Object.create(Vec3.prototype)
-        this._target.x = x
-        this._target.y = y
-        this._target.z = z
+        const _target = Object.create(Vec3.prototype)
+        _target.x = x
+        _target.y = y
+        _target.z = z
 
-        return new Proxy(this._target, {
+        return new Proxy(_target, {
             get: function(target: Vec3, prop: string, receiver: any) {
                 return getValue(target, prop, receiver, Vec3)
             },
@@ -159,11 +163,21 @@ class Vec3 {
     }
 
     [Symbol.toPrimitive]() {
-        return `vec3(${this._target.x}, ${this._target.y}, ${this._target.z})`
+        return this.toString()
+    }
+
+    *[Symbol.iterator]() {
+        yield this.x
+        yield this.y
+        yield this.z
+    }
+
+    toString() {
+        return `vec3(${this.x}, ${this.y}, ${this.z})`
     }
     
     toJSON() {
-        return [this._target.x, this._target.y, this._target.z]
+        return [this.x, this.y, this.z]
     }
 }
 
@@ -187,13 +201,13 @@ class Vec4 {
 
     constructor(x: number, y: number, z: number, w: number) {
 
-        this._target = Object.create(Vec4.prototype)
-        this._target.x = x
-        this._target.y = y
-        this._target.z = z
-        this._target.w = w
+        const _target = Object.create(Vec4.prototype)
+        _target.x = x
+        _target.y = y
+        _target.z = z
+        _target.w = w
 
-        return new Proxy(this._target, {
+        return new Proxy(_target, {
             get: function(target: Vec4, prop: string, receiver: any) {
                 return getValue(target, prop, receiver, Vec4)
             },
@@ -208,24 +222,35 @@ class Vec4 {
     }
 
     [Symbol.toPrimitive]() {
-        return `vec4${this._target.x}, ${this._target.y}, ${this._target.z}, ${this._target.w})`
+        return this.toString()
+    }
+
+    *[Symbol.iterator]() {
+        yield this.x
+        yield this.y
+        yield this.z
+        yield this.w
+    }
+
+    toString() {
+        return `vec4(${this.x}, ${this.y}, ${this.z}, ${this.w})`
     }
     
     toJSON() {
-        return [this._target.x, this._target.y, this._target.z, this._target.w]
+        return [this.x, this.y, this.z, this.w]
     }
 }
 
 function vec2(x: number, y: number) {
-    return new Vec2(x, y) as unknown as Vec<Vec2Attr>
+    return new Vec2(x, y) as unknown as Vec<V2>
 }
 
 function vec3(x: number, y: number, z: number) {
-    return new Vec3(x, y, z) as unknown as Vec<Vec3Attr>
+    return new Vec3(x, y, z) as unknown as Vec<V3>
 }
 
 function vec4(x: number, y: number, z: number, w: number) {
-    return new Vec4(x, y, z, w) as unknown as Vec<Vec4Attr>
+    return new Vec4(x, y, z, w) as unknown as Vec<V4>
 }
 
 export { vec2, vec3, vec4 }

@@ -21,6 +21,6 @@ console.log(v3.g) // 2
 console.log(v3.b) // 3
 console.log(v3.xx) // {x: 1, y: 1}
 console.log(v3.xy) // {x: 1, y: 2}
-console.log(v3.rgb) // [1, 2, 3]
+console.log(v3.rgb) // {x: 1, y: 2, z: 3}
 
 ```
