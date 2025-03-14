@@ -15,7 +15,8 @@
   "scripts": {
     "lint": "eslint --fix",
     "build": "rollup -c",
-    "test": "vitest"
+    "test": "vitest",
+    "publish": "pnpm publish --registry=https://registry.npmjs.org --access=public"
   },
   "keywords": [],
   "sideEffects": false,
