@@ -5,11 +5,11 @@ A JavaScript library for working with vectors.
 ## Usage
 
 ```bash
-npm install vec-js
+npm install @taiyuuki/vec-js
 ```
 
 ```javascript
-import { vec2, vec3, vec4 } from 'vec-js'
+import { vec2, vec3, vec4 } from '@taiyuuki/vec-js'
 
 const v3 = vec3(1, 2, 3)
 
