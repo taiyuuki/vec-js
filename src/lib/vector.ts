@@ -1,21 +1,4 @@
-type Key = number | string | symbol
-type V2 = 'g' | 'r' | 'x' | 'y'
-type V3 = 'b' | 'g' | 'r' | 'x' | 'y' | 'z'
-type V4 = 'a' | 'b' | 'g' | 'r' | 'w' | 'x' | 'y' | 'z'
-
-type Vec<T extends string> = {
-    [K in `${T}${T}`]: Vec<V2>;
-} & {
-    [K in `${T}${T}${T}`]: Vec<V3>;
-} & {
-    [K in `${T}${T}${T}${T}`]: Vec<V4>;
-} & {
-    [K in T]: number;
-} & { 
-    [Symbol.iterator]: ()=> IterableIterator<number>;
-    toString(): string;
-    toJSON(): number[];
-} & { [K: number]: number }
+import type { Key, V2, V3, V4, Vec } from './types'
 
 function keyIn<T extends object>(key: Key, obj: T): key is keyof T {
     return key in obj
@@ -179,7 +162,7 @@ class Vec3 extends Vector {
 
 class Vec4 extends Vector {
     [key: string]: any
-    
+
     static readonly PROPS = {
         x: 'x',
         y: 'y',
