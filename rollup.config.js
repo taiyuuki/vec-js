@@ -7,6 +7,7 @@ import globals from 'rollup-plugin-node-globals'
 import builtins from 'rollup-plugin-node-builtins'
 import terser from '@rollup/plugin-terser'
 import dts from 'rollup-plugin-dts'
+import { importExportPlugin } from 'rollup-plugin-import-export'
 
 const config = defineConfig([
     {
@@ -31,6 +32,7 @@ const config = defineConfig([
                 babelHelpers: 'bundled',
             }),
             commonjs(),
+            importExportPlugin(),
         ],
     },
     {
@@ -54,6 +56,7 @@ const config = defineConfig([
             globals(),
             builtins(),
             terser(),
+            importExportPlugin(),
         ],
     },
     {
@@ -63,7 +66,10 @@ const config = defineConfig([
             format: 'esm',
             preserveModules: true,
         },
-        plugins: [dts()],
+        plugins: [
+            dts(),
+            importExportPlugin(),
+        ],
     },
 ])
 

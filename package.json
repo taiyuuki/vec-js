@@ -1,6 +1,6 @@
 {
   "name": "@taiyuuki/vec-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A JavaScript library for working with vectors.",
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -44,13 +44,13 @@
     "rollup": "^4.35.0",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-import-export": "^0.0.1",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.8.2",
     "vitest": "^3.0.8"
   },
-  "dependencies": {},
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {

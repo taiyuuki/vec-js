@@ -41,6 +41,9 @@ importers:
       rollup-plugin-dts:
         specifier: ^6.1.1
         version: 6.1.1(rollup@4.35.0)(typescript@5.8.2)
+      rollup-plugin-import-export:
+        specifier: ^0.0.1
+        version: 0.0.1
       rollup-plugin-node-builtins:
         specifier: ^2.1.2
         version: 2.1.2
@@ -1958,6 +1961,9 @@ packages:
     peerDependencies:
       rollup: ^3.29.4 || ^4
       typescript: ^4.5 || ^5.0
+
+  rollup-plugin-import-export@0.0.1:
+    resolution: {integrity: sha512-LeuMxKa2HfI+6aql2G5wyzYVypDG6lIz7vugdmVnrG8al3nr0Ps6yAeyHsUPr8DxlMJO89RGqIbtGds2OVH0mw==}
 
   rollup-plugin-node-builtins@2.1.2:
     resolution: {integrity: sha512-bxdnJw8jIivr2yEyt8IZSGqZkygIJOGAWypXvHXnwKAbUcN4Q/dGTx7K0oAJryC/m6aq6tKutltSeXtuogU6sw==}
@@ -4561,6 +4567,8 @@ snapshots:
       typescript: 5.8.2
     optionalDependencies:
       '@babel/code-frame': 7.26.2
+
+  rollup-plugin-import-export@0.0.1: {}
 
   rollup-plugin-node-builtins@2.1.2:
     dependencies:

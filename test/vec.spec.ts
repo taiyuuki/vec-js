@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { vec2, vec3, vec4 } from 'src/index'
+import { vec2, vec3, vec4 } from 'src/lib/vector'
 
 describe('Vec', () => {
     it('vec2', () => {
@@ -29,6 +29,15 @@ describe('Vec', () => {
         v[1] = 8
         expect(v.x).toBe(7)
         expect(v.y).toBe(8)
+
+        expect(v.toString()).toMatchInlineSnapshot('"vec2(7,8)"')
+        expect(JSON.stringify(v)).toMatchInlineSnapshot('"[7,8]"')
+
+        let i = 0
+        for (const k of v) {
+            expect(k).toBe(v[i])
+            i++
+        }
     })
 
     it('vec3', () => {
@@ -74,6 +83,15 @@ describe('Vec', () => {
         expect(v.x).toBe(12)
         expect(v.y).toBe(13)
         expect(v.z).toBe(14)
+
+        expect(v.toString()).toMatchInlineSnapshot('"vec3(12,13,14)"')
+        expect(JSON.stringify(v)).toMatchInlineSnapshot('"[12,13,14]"')
+
+        let i = 0
+        for (const k of v) {
+            expect(k).toBe(v[i])
+            i++
+        }
     })
 
     it('vec4', () => {
@@ -135,5 +153,14 @@ describe('Vec', () => {
         expect(v.y).toBe(19)
         expect(v.z).toBe(20)
         expect(v.w).toBe(21)
+
+        expect(v.toString()).toMatchInlineSnapshot('"vec4(18,19,20,21)"')
+        expect(JSON.stringify(v)).toMatchInlineSnapshot('"[18,19,20,21]"')
+
+        let i = 0
+        for (const k of v) {
+            expect(k).toBe(v[i])
+            i++
+        }
     })
 })
