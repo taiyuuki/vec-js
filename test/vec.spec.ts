@@ -163,5 +163,221 @@ describe('Vec', () => {
             i++
         }
     })
+
+    it('vec2.add', () => {
+        const v1 = vec2(1, 2)
+        const v2 = vec2(3, 4)
+
+        expect(v1.add(v2)).toEqual(vec2(4, 6))
+    })
+
+    it('vec3.add', () => {
+        const v1 = vec3(1, 2, 3)
+        const v2 = vec3(4, 5, 6)
+
+        expect(v1.add(v2)).toEqual(vec3(5, 7, 9))
+    })
+
+    it('vec4.add', () => {
+        const v1 = vec4(1, 2, 3, 4)
+        const v2 = vec4(5, 6, 7, 8)
+
+        expect(v1.add(v2)).toEqual(vec4(6, 8, 10, 12))
+    })
+
+    it('vec2.sub', () => {
+        const v1 = vec2(1, 2)
+        const v2 = vec2(3, 4)
+
+        expect(v1.sub(v2)).toEqual(vec2(-2, -2))
+    })
+
+    it('vec3.sub', () => {
+        const v1 = vec3(1, 2, 3)
+        const v2 = vec3(4, 5, 6)
+
+        expect(v1.sub(v2)).toEqual(vec3(-3, -3, -3))
+    })
+
+    it('vec4.sub', () => {
+        const v1 = vec4(1, 2, 3, 4)
+        const v2 = vec4(5, 6, 7, 8)
+
+        expect(v1.sub(v2)).toEqual(vec4(-4, -4, -4, -4))
+    })
+
+    it('vec2.mul', () => {
+        const v1 = vec2(1, 2)
+        const v2 = vec2(3, 4)
+
+        expect(v1.mul(v2)).toEqual(vec2(3, 8))
+    })
+
+    it('vec3.mul', () => {
+        const v1 = vec3(1, 2, 3)
+        const v2 = vec3(4, 5, 6)
+
+        expect(v1.mul(v2)).toEqual(vec3(4, 10, 18))
+    })
+
+    it('vec4.mul', () => {
+        const v1 = vec4(1, 2, 3, 4)
+        const v2 = vec4(5, 6, 7, 8)
+
+        expect(v1.mul(v2)).toEqual(vec4(5, 12, 21, 32))
+    })
+
+    it('vec2.dot', () => {
+        const v1 = vec2(1, 2)
+        const v2 = vec2(3, 4)
+
+        expect(v1.dot(v2)).toBe(11)
+    })
+
+    it('vec3.dot', () => {
+        const v1 = vec3(1, 2, 3)
+        const v2 = vec3(4, 5, 6)
+
+        expect(v1.dot(v2)).toBe(32)
+    })
+
+    it('vec4.dot', () => {
+        const v1 = vec4(1, 2, 3, 4)
+        const v2 = vec4(5, 6, 7, 8)
+
+        expect(v1.dot(v2)).toBe(70)
+    })
+
+    it('vec2.length', () => {
+        const v = vec2(3, 4)
+
+        expect(v.length()).toBe(5)
+    })
+
+    it('vec3.length', () => {
+        const v = vec3(3, 4, 5)
+
+        expect(v.length()).toBeCloseTo(7.0710678)
+    })
+
+    it('vec4.length', () => {
+        const v = vec4(3, 4, 5, 6)
+
+        expect(v.length()).toBeCloseTo(9.273618)
+    })
+
+    it('vec2.normalize', () => {
+        const v = vec2(3, 4)
+
+        expect(v.normalize().length()).toBeCloseTo(1)
+    })
+
+    it('vec3.normalize', () => {
+        const v = vec3(3, 4, 5)
+
+        expect(v.normalize().length()).toBeCloseTo(1)
+    })
+
+    it('vec4.normalize', () => {
+        const v = vec4(3, 4, 5, 6)
+
+        expect(v.normalize().length()).toBeCloseTo(1)
+    })
+
+    it('vec2.equals', () => {
+        const v1 = vec2(1, 2)
+        const v2 = vec2(1, 2)
+        const v3 = vec2(3, 4)
+
+        expect(v1.equals(v2)).toBe(true)
+        expect(v1.equals(v3)).toBe(false)
+    })
+
+    it('vec3.equals', () => {
+        const v1 = vec3(1, 2, 3)
+        const v2 = vec3(1, 2, 3)
+        const v3 = vec3(3, 4, 5)
+
+        expect(v1.equals(v2)).toBe(true)
+        expect(v1.equals(v3)).toBe(false)
+    })
+
+    it('vec4.equals', () => {
+        const v1 = vec4(1, 2, 3, 4)
+        const v2 = vec4(1, 2, 3, 4)
+        const v3 = vec4(3, 4, 5, 6)
+
+        expect(v1.equals(v2)).toBe(true)
+        expect(v1.equals(v3)).toBe(false)
+    })
+
+    it('vec2.distance', () => {
+        const v1 = vec2(1, 2)
+        const v2 = vec2(3, 4)
+
+        expect(v1.distance(v2)).toBeCloseTo(2.8284)
+    })
+
+    it('vec3.distance', () => { 
+        const v1 = vec3(1, 2, 3)
+        const v2 = vec3(4, 5, 6)
+
+        expect(v1.distance(v2)).toBeCloseTo(5.1961)
+    })
+
+    it('vec4.distance', () => {
+        const v1 = vec4(1, 2, 3, 4)
+        const v2 = vec4(5, 6, 7, 8)
+
+        expect(v1.distance(v2)).toBeCloseTo(8)
+    })
+
+    it('vec2.lerp', () => {
+        const v1 = vec2(1, 2)
+        const v2 = vec2(3, 4)
+
+        expect(v1.lerp(v2, 0)).toEqual(vec2(1, 2))
+        expect(v1.lerp(v2, 0.5)).toEqual(vec2(2, 3))
+        expect(v1.lerp(v2, 1)).toEqual(vec2(3, 4))
+    })
+
+    it('vec3.lerp', () => {
+        const v1 = vec3(1, 2, 3)
+        const v2 = vec3(4, 5, 6)
+
+        expect(v1.lerp(v2, 0)).toEqual(vec3(1, 2, 3))
+        expect(v1.lerp(v2, 0.5)).toEqual(vec3(2.5, 3.5, 4.5))
+        expect(v1.lerp(v2, 1)).toEqual(vec3(4, 5, 6))
+    })
+
+    it('vec4.lerp', () => {
+        const v1 = vec4(1, 2, 3, 4)
+        const v2 = vec4(5, 6, 7, 8)
+
+        expect(v1.lerp(v2, 0)).toEqual(vec4(1, 2, 3, 4))
+        expect(v1.lerp(v2, 0.5)).toEqual(vec4(3, 4, 5, 6))
+        expect(v1.lerp(v2, 1)).toEqual(vec4(5, 6, 7, 8))
+    })
+
+    it('vec2.angle', () => {
+        const v1 = vec2(1, 0)
+        const v2 = vec2(0, 1)
+
+        expect(v1.angle(v2)).toBeCloseTo(Math.PI / 2)
+    })
+
+    it('vec3.angle', () => {
+        const v1 = vec3(1, 0, 0)
+        const v2 = vec3(0, 1, 0)
+
+        expect(v1.angle(v2)).toBeCloseTo(Math.PI / 2)
+    })
+
+    it('vec4.angle', () => {
+        const v1 = vec4(1, 0, 0, 0)
+        const v2 = vec4(0, 1, 0, 0)
+
+        expect(v1.angle(v2)).toBeCloseTo(Math.PI / 2)   
+    })
 })
 

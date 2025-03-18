@@ -66,19 +66,161 @@ function setValue(target: any, prop: string, value: any, receiver: any) {
 
 class Vector {
     [key: string]: any
+    static readonly _PROPS = ['x', 'y', 'z', 'w']
 
     constructor(values: number[]) {
         const _target = Object.create(Object.getPrototypeOf(this))
 
-        const _props = ['x', 'y', 'z', 'w']
         values.forEach((value, index) => {
-            _target[_props[index]] = value
+            _target[Vector._PROPS[index]] = value
         })
 
         return new Proxy(_target, {
             get: getValue,
             set: setValue,
         })
+    }
+
+    get SelfConstructor() {
+        return Object.getPrototypeOf(this).constructor
+    }
+
+    add(v: Vector) {
+        const args = []
+        const Vec = this.SelfConstructor
+        for (const k in this) {
+            args.push(this[k] + v[k])
+        }
+
+        return new Vec(...args)
+    }
+
+    sub(v: Vector) {
+        const args = []
+        const Vec = this.SelfConstructor
+        
+        for (const k in this) {
+            args.push(this[k] - v[k])
+        }
+ 
+        return new Vec(...args)
+    }
+
+    mul(v: Vector) {
+        const args = []
+        const Vec = this.SelfConstructor
+        for (const k in this) {
+            args.push(this[k] * v[k])
+        }
+ 
+        return new Vec(...args)
+    }
+
+    div(v: Vector) {
+        const args = []
+        const Vec = this.SelfConstructor
+        for (const k in this) {
+            args.push(this[k] / v[k])
+        }
+ 
+        return new Vec(...args)
+    }
+
+    dot(v: Vector) {
+        let dot = 0
+        for (const k in this) {
+            dot += this[k] * v[k]
+        }
+
+        return dot
+    }
+
+    length() {
+        let len = 0
+        for (const a of this) {
+            len += a ** 2
+        }
+
+        return Math.sqrt(len)
+    }
+
+    normalize() {
+        const Vec = this.SelfConstructor
+        const len = this.length()
+        const args = []
+        for (const a of this) {
+            args.push(a / len)
+        }
+ 
+        return new Vec(...args)
+    }
+
+    angle(v: Vector) {
+        const len1 = this.length()
+        const len2 = v.length()
+        const dot = this.dot(v)
+        const cos = dot / (len1 * len2)
+
+        return Math.acos(cos)
+    }
+
+    distance(v: Vector) {
+        let d = 0
+        for (const k in this) {
+            d += (this[k] - v[k]) ** 2
+        }
+ 
+        return Math.sqrt(d)
+    }
+
+    lerp(v: Vector, t: number) {
+        const Vec = Object.getPrototypeOf(this).constructor
+        const args = []
+        for (const k in this) {
+            args.push(this[k] + (v[k] - this[k]) * t)
+        }
+ 
+        return new Vec(...args)
+    }
+
+    max(v: Vector) {
+        const Vec = Object.getPrototypeOf(this).constructor
+        const args = []
+        for (const k in this) {
+            args.push(Math.max(this[k], v[k]))
+        }
+ 
+        return new Vec(...args)
+    }
+
+    min(v: Vector) {
+        const Vec = Object.getPrototypeOf(this).constructor
+        const args = []
+        for (const k in this) {
+            args.push(Math.min(this[k], v[k]))
+        }
+
+        return new Vec(...args)
+    }
+
+    clone() {
+        const Vec = Object.getPrototypeOf(this).constructor
+        const args = []
+        for (const a of this) {
+            args.push(a)
+        }
+        
+        return new Vec(...args)
+    }
+
+    equals(v: Vector) {
+        for (const k in this) {
+            if (Math.abs(this[k] - v[k]) > 0.00001) {
+                return false
+            }
+        }
+ 
+        return true
     }
 
     [Symbol.toStringTag]() {
@@ -90,8 +232,10 @@ class Vector {
     }
 
     *[Symbol.iterator]() {
-        for (let i = 0; i < Object.keys(this).length; i++) {
-            yield this[i]
+        for (let i = 0; i < Vector._PROPS.length; i++) {
+            if (keyIn(Vector._PROPS[i], this)) {
+                yield this[Vector._PROPS[i]]
+            }
         }
     }
 

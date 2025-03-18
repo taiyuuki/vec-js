@@ -15,8 +15,24 @@ type Vec<T extends string> = {
     [Symbol.iterator]: ()=> IterableIterator<number>;
     toString(): string;
     toJSON(): number[];
+    add(v: Vec<T>): Vec<T>;
+    sub(v: Vec<T>): Vec<T>;
+    mul(v: Vec<T>): VecType;
+    div(v: Vec<T>): Vec<T>;
+    dot(v: Vec<T>): number;
+    length(): number;
+    normalize(): Vec<T>;
+    distance(v: Vec<T>): number;
+    angle(v: Vec<T>): number;
+    lerp(v: Vec<T>, t: number): Vec<T>;
+    max(v: Vec<T>): Vec<T>;
+    min(v: Vec<T>): Vec<T>;
+    clone(): Vec<T>;
+    equals(v: Vec<T>): boolean;
 } & { [K: number]: number }
+
+type VecType = Vec<V2> | Vec<V3> | Vec<V4>
 
 type VecArg = Vec<V2> | Vec<V3> | Vec<V4> | number
 
-export type { Key, V2, V3, V4, Vec, VecArg }
+export type { Key, V2, V3, V4, Vec, VecType, VecArg }
